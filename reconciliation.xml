@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!-- This file is part of the nodux_account_bank_reconciliation module for Tryton.
+The COPYRIGHT file at the top level of this repository contains
+the full copyright notices and license terms. -->
+<tryton>
+    <data>
+
+<!-- Bank reconciliation -->
+        <menuitem name="Bank Reconciliation" parent="account.menu_account"
+            id="menu_reconciliation" sequence="35"/>
+
+        <record model="ir.ui.view" id="account_reconciliation_form">
+            <field name="model">account.reconciliation</field>
+            <field name="type">form</field>
+            <field name="name">account_reconciled_form</field>
+        </record>
+        <record model="ir.ui.view" id="account_reconciliation_tree">
+            <field name="model">account.reconciliation</field>
+            <field name="type">tree</field>
+            <field name="name">account_reconciled_tree</field>
+        </record>
+
+        <record model="ir.action.act_window" id="act_reconciliation_form">
+            <field name="name">All Reconciliation</field>
+            <field name="res_model">account.reconciliation</field>
+        </record>
+        <record model="ir.action.act_window.view" id="act_reconciliation_form_view1">
+            <field name="sequence" eval="10"/>
+            <field name="view" ref="account_reconciliation_tree"/>
+            <field name="act_window" ref="act_reconciliation_form"/>
+        </record>
+        <record model="ir.action.act_window.view" id="act_reconciliation_form_view2">
+            <field name="sequence" eval="20"/>
+            <field name="view" ref="account_reconciliation_form"/>
+            <field name="act_window" ref="act_reconciliation_form"/>
+        </record>
+        <menuitem parent="menu_reconciliation" action="act_reconciliation_form"
+            id="menu_reconciliation_form" sequence="5"/>
+
+        <!--Wizard conciliarion -->
+
+        <record model="ir.ui.view" id="reconciliation_start_view_form">
+           <field name="model">account.reconciliation.start</field>
+           <field name="type">form</field>
+           <field name="name">reconciliation_form</field>
+       </record>
+
+       <record model="ir.action.wizard" id="reconciliation">
+           <field name="name">Conciliacion bancaria</field>
+           <field name="wiz_name">account.all.reconciliation</field>
+       </record>
+
+        <record model="ir.action.keyword" id="action_reconciliation_keyword">
+           <field name="keyword">form_action</field>
+           <field name="model">account.reconciliation,-1</field>  <!-- Que vista de modelo aparece -->
+           <field name="action" ref="reconciliation"/>
+       </record>
+
+        <!--record model="ir.ui.view" id="lines_view_tree">
+            <field name="model">account.postdated.line</field>
+            <field name="type">tree</field>
+            <field name="name">lines_tree</field>
+        </record-->
+
+    </data>
+</tryton>
