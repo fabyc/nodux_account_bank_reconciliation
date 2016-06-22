@@ -1,0 +1,123 @@
+#
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "error:account.reconciliation:"
+msgid "No puede eliminiar una conciliacion bancaria!"
+msgstr ""
+
+msgctxt "field:account.reconciliation,account:"
+msgid "Cuenta"
+msgstr ""
+
+msgctxt "field:account.reconciliation,amount:"
+msgid "Valor"
+msgstr ""
+
+msgctxt "field:account.reconciliation,company:"
+msgid "Company"
+msgstr "Empresa"
+
+msgctxt "field:account.reconciliation,conciliar:"
+msgid "Conciliar"
+msgstr ""
+
+msgctxt "field:account.reconciliation,create_date:"
+msgid "Create Date"
+msgstr "Fecha de Creación"
+
+msgctxt "field:account.reconciliation,create_uid:"
+msgid "Create User"
+msgstr "Usuario creación"
+
+msgctxt "field:account.reconciliation,currency:"
+msgid "Currency"
+msgstr "Moneda"
+
+msgctxt "field:account.reconciliation,date:"
+msgid "Date"
+msgstr "Fecha"
+
+msgctxt "field:account.reconciliation,id:"
+msgid "ID"
+msgstr "ID"
+
+msgctxt "field:account.reconciliation,rec_name:"
+msgid "Name"
+msgstr "Nombre"
+
+msgctxt "field:account.reconciliation,state:"
+msgid "Estado"
+msgstr ""
+
+msgctxt "field:account.reconciliation,write_date:"
+msgid "Write Date"
+msgstr "Modificado por usuario"
+
+msgctxt "field:account.reconciliation,write_uid:"
+msgid "Write User"
+msgstr "Usuario modificación"
+
+msgctxt "field:account.reconciliation.start,id:"
+msgid "ID"
+msgstr "ID"
+
+msgctxt "model:account.reconciliation,name:"
+msgid "Account Bank Reconciliation"
+msgstr "Conciliaciones bancarias"
+
+msgctxt "model:account.reconciliation.start,name:"
+msgid "Reconciliation Start"
+msgstr ""
+
+msgctxt "model:ir.action,name:act_reconciliation_form"
+msgid "All Reconciliation"
+msgstr "Todas las conciliaciones"
+
+msgctxt "model:ir.action,name:reconciliation"
+msgid "Conciliacion bancaria"
+msgstr ""
+
+msgctxt "model:ir.ui.menu,name:menu_reconciliation"
+msgid "Bank Reconciliation"
+msgstr "Conciliación bancaria"
+
+msgctxt "model:ir.ui.menu,name:menu_reconciliation_form"
+msgid "All Reconciliation"
+msgstr "Todas las conciliaciones"
+
+msgctxt "selection:account.reconciliation,state:"
+msgid "Borrador"
+msgstr ""
+
+msgctxt "selection:account.reconciliation,state:"
+msgid "Conciliado"
+msgstr ""
+
+msgctxt "view:account.reconciliation.start:"
+msgid "Seguro que desea conciliar"
+msgstr ""
+
+msgctxt "view:account.reconciliation:"
+msgid "Amount"
+msgstr "Valor"
+
+msgctxt "view:account.reconciliation:"
+msgid "Bank reconciliation"
+msgstr "Conciliación bancaria"
+
+msgctxt "view:account.reconciliation:"
+msgid "Postdated check"
+msgstr "Cheques posfechados"
+
+msgctxt "view:account.reconciliation:"
+msgid "_Conciliar"
+msgstr ""
+
+msgctxt "wizard_button:account.all.reconciliation,start,accept:"
+msgid "Conciliar"
+msgstr ""
+
+msgctxt "wizard_button:account.all.reconciliation,start,end:"
+msgid "Cancel"
+msgstr "Cancelar"
