@@ -6,18 +6,19 @@ the full copyright notices and license terms. -->
     <label name="date"/>
     <field name="date"/>
     <newline/>
-    <label name="currency"/>
-    <field name="currency"/>
     <label name="amount"/>
     <field name="amount"/>
+    <label name="currency"/>
+    <field name="currency"/>
     <newline/>
-    <label name="conciliar"/>
-    <field name="conciliar"/>
     <label name="account"/>
     <field name="account"/>
+    <label name="conciliar"/>
+    <field name="conciliar"/>
+    <newline/>
     <label name="state"/>
     <field name="state"/>
-    <group colspan="6" id="group_check_1">
+    <group colspan="2" id="group_check_1">
         <button name="reconcile" string="_Conciliar"/>
     </group>
 </form>
