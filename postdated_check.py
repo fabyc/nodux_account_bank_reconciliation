@@ -22,17 +22,18 @@ except:
 
 
 __all__ = ['AccountPostDateCheck']
-__metaclass__ = PoolMeta
+
 
 class AccountPostDateCheck():
-    'Account Post Date Check'
+    __metaclass__ = PoolMeta
     __name__ = 'account.postdated'
+
     _rec_name = 'number'
-    
+
     @classmethod
     def __setup__(cls):
         super(AccountPostDateCheck, cls).__setup__()
-        
+
     def create_lines_reconcile(self):
         pool = Pool()
         Reconciled = pool.get('account.reconciliation')
