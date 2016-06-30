@@ -23,11 +23,9 @@ except:
 
 __all__ = ['AccountPostDateCheck']
 
-
 class AccountPostDateCheck():
     __metaclass__ = PoolMeta
     __name__ = 'account.postdated'
-
     _rec_name = 'number'
 
     @classmethod
@@ -40,13 +38,11 @@ class AccountPostDateCheck():
         reconciled = Reconciled()
 
         for line in self.lines:
-            print "La linea ", line
             reconciled.amount = line.amount
             reconciled.conciliar = False
             reconciled.account = line.account_new.id
             reconciled.state = 'draft'
             reconciled.date = line.date
-            print "Guardar ", reconciled
             reconciled.save()
 
     @classmethod

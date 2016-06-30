@@ -55,12 +55,6 @@ the full copyright notices and license terms. -->
            <field name="model">account.reconciliation,-1</field>  <!-- Que vista de modelo aparece -->
            <field name="action" ref="reconciliation"/>
        </record>
-
-        <!--record model="ir.ui.view" id="lines_view_tree">
-            <field name="model">account.postdated.line</field>
-            <field name="type">tree</field>
-            <field name="name">lines_tree</field>
-        </record-->
-
+       
     </data>
 </tryton>
