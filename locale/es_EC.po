@@ -14,6 +14,14 @@ msgctxt "field:account.reconciliation,amount:"
 msgid "Valor"
 msgstr ""
 
+msgctxt "field:account.reconciliation,bank_account:"
+msgid "Number bank account"
+msgstr "No. de cuenta"
+
+msgctxt "field:account.reconciliation,ch_num:"
+msgid "Check num"
+msgstr "No. de cheque"
+
 msgctxt "field:account.reconciliation,company:"
 msgid "Company"
 msgstr "Empresa"
@@ -38,9 +46,17 @@ msgctxt "field:account.reconciliation,date:"
 msgid "Date"
 msgstr "Fecha"
 
+msgctxt "field:account.reconciliation,expired:"
+msgid "Expired Date"
+msgstr "Fecha vencimiento"
+
 msgctxt "field:account.reconciliation,id:"
 msgid "ID"
 msgstr "ID"
+
+msgctxt "field:account.reconciliation,party:"
+msgid "Party"
+msgstr "Terceros"
 
 msgctxt "field:account.reconciliation,rec_name:"
 msgid "Name"
@@ -62,13 +78,73 @@ msgctxt "field:account.reconciliation.start,id:"
 msgid "ID"
 msgstr "ID"
 
+msgctxt ""
+"field:nodux_account_bank_reconciliation.print_reconciliation.start,account:"
+msgid "Bank account"
+msgstr "Cuenta bancaria"
+
+msgctxt ""
+"field:nodux_account_bank_reconciliation.print_reconciliation.start,company:"
+msgid "Company"
+msgstr "Empresa"
+
+msgctxt ""
+"field:nodux_account_bank_reconciliation.print_reconciliation.start,fecha:"
+msgid "Fecha de conciliacion"
+msgstr ""
+
+msgctxt ""
+"field:nodux_account_bank_reconciliation.print_reconciliation.start,id:"
+msgid "ID"
+msgstr "ID"
+
+msgctxt ""
+"field:nodux_account_bank_reconciliation.print_reconciliation.start,start_period:"
+msgid "Period"
+msgstr "Período"
+
+msgctxt ""
+"field:nodux_account_bank_reconciliation.print_summary_reconciliation.start,account:"
+msgid "Bank account"
+msgstr "Cuenta bancaria"
+
+msgctxt ""
+"field:nodux_account_bank_reconciliation.print_summary_reconciliation.start,company:"
+msgid "Company"
+msgstr "Empresa"
+
+msgctxt ""
+"field:nodux_account_bank_reconciliation.print_summary_reconciliation.start,fecha:"
+msgid "Fecha de conciliacion"
+msgstr ""
+
+msgctxt ""
+"field:nodux_account_bank_reconciliation.print_summary_reconciliation.start,id:"
+msgid "ID"
+msgstr "ID"
+
+msgctxt ""
+"field:nodux_account_bank_reconciliation.print_summary_reconciliation.start,start_period:"
+msgid "Period"
+msgstr "Período"
+
+msgctxt ""
+"help:nodux_account_bank_reconciliation.print_reconciliation.start,fecha:"
+msgid "Fecha de conciliacion para reporte"
+msgstr ""
+
+msgctxt ""
+"help:nodux_account_bank_reconciliation.print_summary_reconciliation.start,fecha:"
+msgid "Fecha de conciliacion para reporte"
+msgstr ""
+
 msgctxt "model:account.reconciliation,name:"
 msgid "Account Bank Reconciliation"
 msgstr "Conciliaciones bancarias"
 
 msgctxt "model:account.reconciliation.start,name:"
 msgid "Reconciliation Start"
-msgstr ""
+msgstr "Iniciar Conciliación"
 
 msgctxt "model:ir.action,name:act_reconciliation_form"
 msgid "All Reconciliation"
@@ -76,6 +152,40 @@ msgstr "Todas las conciliaciones"
 
 msgctxt "model:ir.action,name:reconciliation"
 msgid "Conciliacion bancaria"
+msgstr ""
+
+msgctxt "model:ir.action,name:report_account_reconciliation"
+msgid "Conciliacion"
+msgstr ""
+
+msgctxt "model:ir.action,name:report_account_summary_reconciliation"
+msgid "Resumen de conciliacion"
+msgstr ""
+
+msgctxt "model:ir.action,name:wizard_print_reconciliation"
+msgid "Imprimir conciliacion"
+msgstr ""
+
+msgctxt "model:ir.action,name:wizard_print_summary_reconciliation"
+msgid "Imprimir conciliacion"
+msgstr ""
+
+msgctxt ""
+"model:ir.action.act_window.domain,name:act_reconciliation_domain_draft"
+msgid "Not reconciliated"
+msgstr "No conciliado"
+
+msgctxt ""
+"model:ir.action.act_window.domain,name:act_reconciliation_domain_posted"
+msgid "Reconciliated"
+msgstr "Conciliado"
+
+msgctxt "model:ir.ui.menu,name:menu_print_reconciliation"
+msgid "Imprimir conciliacion"
+msgstr ""
+
+msgctxt "model:ir.ui.menu,name:menu_print_summary_reconciliation"
+msgid "Imprimir conciliacion"
 msgstr ""
 
 msgctxt "model:ir.ui.menu,name:menu_reconciliation"
@@ -86,6 +196,224 @@ msgctxt "model:ir.ui.menu,name:menu_reconciliation_form"
 msgid "All Reconciliation"
 msgstr "Todas las conciliaciones"
 
+msgctxt ""
+"model:nodux_account_bank_reconciliation.print_reconciliation.start,name:"
+msgid "Open Reconciliation Start"
+msgstr "Abrir conciliación"
+
+msgctxt ""
+"model:nodux_account_bank_reconciliation.print_summary_reconciliation.start,name:"
+msgid "Open Summary Reconciliation Start"
+msgstr "Abrir resúmen de conciliación bancaria"
+
+msgctxt "odt:account.reconciliation.report:"
+msgid "-"
+msgstr "-"
+
+msgctxt "odt:account.reconciliation.report:"
+msgid "ANCELACION DE FACT."
+msgstr ""
+
+msgctxt "odt:account.reconciliation.report:"
+msgid "C"
+msgstr ""
+
+msgctxt "odt:account.reconciliation.report:"
+msgid "CH"
+msgstr ""
+
+msgctxt "odt:account.reconciliation.report:"
+msgid "CONTABILIZADO:"
+msgstr "CONTABILIZADO:"
+
+msgctxt "odt:account.reconciliation.report:"
+msgid "Cc"
+msgstr ""
+
+msgctxt "odt:account.reconciliation.report:"
+msgid "DE"
+msgstr ""
+
+msgctxt "odt:account.reconciliation.report:"
+msgid "ELABORADO"
+msgstr "ELABORADO"
+
+msgctxt "odt:account.reconciliation.report:"
+msgid "FIRMA DE RECIBIDO:"
+msgstr "FIRMA DE RECIBIDO:"
+
+msgctxt "odt:account.reconciliation.report:"
+msgid "Fecha"
+msgstr ""
+
+msgctxt "odt:account.reconciliation.report:"
+msgid "Impreso:"
+msgstr "Impreso:"
+
+msgctxt "odt:account.reconciliation.report:"
+msgid "No"
+msgstr "No"
+
+msgctxt "odt:account.reconciliation.report:"
+msgid "No."
+msgstr "No."
+
+msgctxt "odt:account.reconciliation.report:"
+msgid "Nodux Cía. Ltda.: (07) 2 560215 – 0999323367 – hola@nodux.e"
+msgstr ""
+
+msgctxt "odt:account.reconciliation.report:"
+msgid "Nombre"
+msgstr ""
+
+msgctxt "odt:account.reconciliation.report:"
+msgid "Nota"
+msgstr ""
+
+msgctxt "odt:account.reconciliation.report:"
+msgid "Operaciones: PENDIENTES"
+msgstr ""
+
+msgctxt "odt:account.reconciliation.report:"
+msgid "POR:"
+msgstr "POR:"
+
+msgctxt "odt:account.reconciliation.report:"
+msgid "Pag."
+msgstr ""
+
+msgctxt "odt:account.reconciliation.report:"
+msgid "RESUMEN DE CONCILIACIÓN, PERIODO :"
+msgstr ""
+
+msgctxt "odt:account.reconciliation.report:"
+msgid "REVISADO / APROBADO:"
+msgstr "REVISADO / APROBADO:"
+
+msgctxt "odt:account.reconciliation.report:"
+msgid "RUC/C.I.:"
+msgstr "C.I./RUC"
+
+msgctxt "odt:account.reconciliation.report:"
+msgid "TOTAL CHEQUE $"
+msgstr ""
+
+msgctxt "odt:account.reconciliation.report:"
+msgid "Tipo"
+msgstr ""
+
+msgctxt "odt:account.reconciliation.report:"
+msgid "Valor"
+msgstr ""
+
+msgctxt "odt:account.reconciliation.report:"
+msgid "Vence"
+msgstr ""
+
+msgctxt "odt:account.reconciliation.report:"
+msgid "c"
+msgstr "c"
+
+msgctxt "odt:account.reconciliation.report:"
+msgid "de"
+msgstr ""
+
+msgctxt "odt:account.summary_reconciliation.report:"
+msgid "-"
+msgstr "-"
+
+msgctxt "odt:account.summary_reconciliation.report:"
+msgid ":"
+msgstr ":"
+
+msgctxt "odt:account.summary_reconciliation.report:"
+msgid "Analista contable"
+msgstr ""
+
+msgctxt "odt:account.summary_reconciliation.report:"
+msgid "Aprobado por"
+msgstr ""
+
+msgctxt "odt:account.summary_reconciliation.report:"
+msgid "C.I./"
+msgstr ""
+
+msgctxt "odt:account.summary_reconciliation.report:"
+msgid "CHEQUE"
+msgstr ""
+
+msgctxt "odt:account.summary_reconciliation.report:"
+msgid "DEPOSITO"
+msgstr ""
+
+msgctxt "odt:account.summary_reconciliation.report:"
+msgid "Descripción"
+msgstr ""
+
+msgctxt "odt:account.summary_reconciliation.report:"
+msgid "Elaborado por"
+msgstr ""
+
+msgctxt "odt:account.summary_reconciliation.report:"
+msgid "En transito"
+msgstr ""
+
+msgctxt "odt:account.summary_reconciliation.report:"
+msgid "Exceso"
+msgstr ""
+
+msgctxt "odt:account.summary_reconciliation.report:"
+msgid "Impreso:"
+msgstr "Impreso:"
+
+msgctxt "odt:account.summary_reconciliation.report:"
+msgid "NOTA DEBITO"
+msgstr ""
+
+msgctxt "odt:account.summary_reconciliation.report:"
+msgid "Nodux Cía. Ltda.: (07) 2 560215 – 0999323367 – hola@nodux.e"
+msgstr ""
+
+msgctxt "odt:account.summary_reconciliation.report:"
+msgid "Pag."
+msgstr ""
+
+msgctxt "odt:account.summary_reconciliation.report:"
+msgid "RESUMEN DE CONCILIACIÓN, PERIODO:"
+msgstr ""
+
+msgctxt "odt:account.summary_reconciliation.report:"
+msgid "RUC"
+msgstr "RUC"
+
+msgctxt "odt:account.summary_reconciliation.report:"
+msgid "Recibido"
+msgstr ""
+
+msgctxt "odt:account.summary_reconciliation.report:"
+msgid "SALDO FINAL"
+msgstr "SALDO FINAL"
+
+msgctxt "odt:account.summary_reconciliation.report:"
+msgid "SALDO INICIAL"
+msgstr "SALDO INICIAL"
+
+msgctxt "odt:account.summary_reconciliation.report:"
+msgid "Segun Bancos"
+msgstr ""
+
+msgctxt "odt:account.summary_reconciliation.report:"
+msgid "Según Libro"
+msgstr ""
+
+msgctxt "odt:account.summary_reconciliation.report:"
+msgid "c"
+msgstr "c"
+
+msgctxt "odt:account.summary_reconciliation.report:"
+msgid "de"
+msgstr ""
+
 msgctxt "selection:account.reconciliation,state:"
 msgid "Borrador"
 msgstr ""
@@ -95,16 +423,16 @@ msgid "Conciliado"
 msgstr ""
 
 msgctxt "view:account.reconciliation.start:"
-msgid "Seguro que desea conciliar"
+msgid "Seguro que desea realizar la conciliacion bancaria"
 msgstr ""
-
-msgctxt "view:account.reconciliation:"
-msgid "Amount"
-msgstr "Valor"
 
 msgctxt "view:account.reconciliation:"
 msgid "Bank reconciliation"
 msgstr "Conciliación bancaria"
+
+msgctxt "view:account.reconciliation:"
+msgid "Monto conciliado"
+msgstr ""
 
 msgctxt "view:account.reconciliation:"
 msgid "Postdated check"
@@ -114,6 +442,15 @@ msgctxt "view:account.reconciliation:"
 msgid "_Conciliar"
 msgstr ""
 
+msgctxt "view:nodux_account_bank_reconciliation.print_reconciliation.start:"
+msgid "Reporte conciliacion bancaria"
+msgstr ""
+
+msgctxt ""
+"view:nodux_account_bank_reconciliation.print_summary_reconciliation.start:"
+msgid "Resumen conciliacion bancaria"
+msgstr ""
+
 msgctxt "wizard_button:account.all.reconciliation,start,accept:"
 msgid "Conciliar"
 msgstr ""
@@ -121,3 +458,23 @@ msgstr ""
 msgctxt "wizard_button:account.all.reconciliation,start,end:"
 msgid "Cancel"
 msgstr "Cancelar"
+
+msgctxt ""
+"wizard_button:nodux_account_bank_reconciliation.print_reconciliation,start,end:"
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgctxt ""
+"wizard_button:nodux_account_bank_reconciliation.print_reconciliation,start,print_:"
+msgid "Print"
+msgstr "Imprimir"
+
+msgctxt ""
+"wizard_button:nodux_account_bank_reconciliation.print_summary_reconciliation,start,end:"
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgctxt ""
+"wizard_button:nodux_account_bank_reconciliation.print_summary_reconciliation,start,print_:"
+msgid "Print"
+msgstr "Imprimir"

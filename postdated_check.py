@@ -28,24 +28,26 @@ class AccountPostDateCheck():
     'Account Post Date Check'
     __name__ = 'account.postdated'
     _rec_name = 'number'
-    
+
     @classmethod
     def __setup__(cls):
         super(AccountPostDateCheck, cls).__setup__()
-        
+
     def create_lines_reconcile(self):
         pool = Pool()
         Reconciled = pool.get('account.reconciliation')
         reconciled = Reconciled()
 
         for line in self.lines:
-            print "La linea ", line
             reconciled.amount = line.amount
             reconciled.conciliar = False
             reconciled.account = line.account_new.id
             reconciled.state = 'draft'
             reconciled.date = line.date
-            print "Guardar ", reconciled
+            reconciled.expired = line.date_expire
+            reconciled.party = self.party
+            reconciled.ch_num = line.num_check
+            reconciled.bank_account = line.num_account
             reconciled.save()
 
     @classmethod

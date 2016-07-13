@@ -5,7 +5,7 @@ the full copyright notices and license terms. -->
 <tryton>
     <data>
 
-<!-- Bank reconciliation -->
+      <!-- Bank reconciliation -->
         <menuitem name="Bank Reconciliation" parent="account.menu_account"
             id="menu_reconciliation" sequence="35"/>
 
@@ -37,8 +37,20 @@ the full copyright notices and license terms. -->
         <menuitem parent="menu_reconciliation" action="act_reconciliation_form"
             id="menu_reconciliation_form" sequence="5"/>
 
-        <!--Wizard conciliarion -->
+        <record model="ir.action.act_window.domain" id="act_reconciliation_domain_draft">
+            <field name="name">Not reconciliated</field>
+            <field name="sequence" eval="10"/>
+            <field name="domain">[('state', '=', 'draft')]</field>
+            <field name="act_window" ref="act_reconciliation_form"/>
+        </record>
+        <record model="ir.action.act_window.domain" id="act_reconciliation_domain_posted">
+            <field name="name">Reconciliated</field>
+            <field name="sequence" eval="20"/>
+            <field name="domain">[('state', '=', 'reconciled')]</field>
+            <field name="act_window" ref="act_reconciliation_form"/>
+        </record>
 
+        <!--Wizard conciliation -->
         <record model="ir.ui.view" id="reconciliation_start_view_form">
            <field name="model">account.reconciliation.start</field>
            <field name="type">form</field>
@@ -54,6 +66,50 @@ the full copyright notices and license terms. -->
            <field name="keyword">form_action</field>
            <field name="model">account.reconciliation,-1</field>  <!-- Que vista de modelo aparece -->
            <field name="action" ref="reconciliation"/>
+       </record>
+
+       <!--Report Summary Reconcialition-->
+       <record model="ir.ui.view" id="print_summary_reconciliation_start_view_form">
+           <field name="model">nodux_account_bank_reconciliation.print_summary_reconciliation.start</field>
+           <field name="type">form</field>
+           <field name="name">print_summary_reconciliation_start_form</field>
+       </record>
+
+       <record model="ir.action.wizard" id="wizard_print_summary_reconciliation">
+           <field name="name">Imprimir resumen de conciliacion</field>
+           <field name="wiz_name">nodux_account_bank_reconciliation.print_summary_reconciliation</field>
+       </record>
+
+       <menuitem parent="account.menu_reporting" action="wizard_print_summary_reconciliation"
+           id="menu_print_summary_reconciliation" icon="tryton-print"/>
+
+       <record model="ir.action.report" id="report_account_summary_reconciliation">
+           <field name="name">Resumen de conciliacion</field>
+           <field name="model"></field>
+           <field name="report_name">account.summary_reconciliation.report</field>
+           <field name="report">nodux_account_bank_reconciliation/summary_reconciliation.odt</field>
+       </record>
+
+       <!--Report Reconcialition-->
+        <record model="ir.ui.view" id="print_reconciliation_start_view_form">
+            <field name="model">nodux_account_bank_reconciliation.print_reconciliation.start</field>
+            <field name="type">form</field>
+            <field name="name">print_reconciliation_start_form</field>
+        </record>
+
+        <record model="ir.action.wizard" id="wizard_print_reconciliation">
+            <field name="name">Imprimir conciliacion</field>
+            <field name="wiz_name">nodux_account_bank_reconciliation.print_reconciliation</field>
+        </record>
+
+        <menuitem parent="account.menu_reporting" action="wizard_print_reconciliation"
+            id="menu_print_reconciliation" icon="tryton-print"/>
+
+       <record model="ir.action.report" id="report_account_reconciliation">
+           <field name="name">Imprimir conciliacion</field>
+           <field name="model"></field>
+           <field name="report_name">account.reconciliation.report</field>
+           <field name="report">nodux_account_bank_reconciliation/reconciliation.odt</field>
        </record>
 
         <!--record model="ir.ui.view" id="lines_view_tree">

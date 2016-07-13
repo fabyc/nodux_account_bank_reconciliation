@@ -23,7 +23,10 @@ except:
     print("Please install it...!")
 
 
-__all__ = [ 'AccountBankReconciliation', 'ReconciliationStart', 'Reconciliation']
+__all__ = [ 'AccountBankReconciliation', 'ReconciliationStart', 'Reconciliation',
+        'OpenReconciliationStart', 'OpenReconciliation','ReconciliationReport',
+        'OpenSummaryReconciliationStart', 'OpenSummaryReconciliation',
+        'SummaryReconciliationReport']
 
 _STATES = {
     'readonly': In(Eval('state'), ['reconciled']),
@@ -43,6 +46,10 @@ class AccountBankReconciliation(ModelSQL, ModelView):
         ('draft', 'Borrador'),
         ('reconciled', 'Conciliado'),
         ], 'Estado', select=True, readonly=True)
+    expired = fields.Date('Expired Date', required=True, states=_STATES)
+    party = fields.Many2One('party.party', 'Party')
+    ch_num = fields.Char('Check num')
+    bank_account = fields.Char('Number bank account')
 
     @classmethod
     def __setup__(cls):
@@ -119,3 +126,158 @@ class Reconciliation(Wizard):
                 reconciled.write([reconciled],{ 'conciliar': True})
                 reconciled.write([reconciled], {'state': 'reconciled'})
         return 'end'
+
+class OpenReconciliationStart(ModelView):
+    'Open Reconciliation Start'
+    __name__ = 'nodux_account_bank_reconciliation.print_reconciliation.start'
+
+    company = fields.Many2One('company.company', 'Company', required=True)
+    fecha = fields.Date('Fecha de conciliacion', help='Fecha de conciliacion para reporte')
+    start_period = fields.Many2One('account.period', 'Period')
+    account = fields.Many2One('bank.account.number', 'Bank account')
+
+    @staticmethod
+    def default_company():
+        return Transaction().context.get('company')
+
+
+    @staticmethod
+    def default_fecha():
+        Date = Pool().get('ir.date')
+        date = Date.today()
+        return date
+
+class OpenReconciliation(Wizard):
+    'Open Reconciliation'
+    __name__ = 'nodux_account_bank_reconciliation.print_reconciliation'
+
+    start = StateView('nodux_account_bank_reconciliation.print_reconciliation.start',
+        'nodux_account_bank_reconciliation.print_reconciliation_start_view_form', [
+            Button('Cancel', 'end', 'tryton-cancel'),
+            Button('Print', 'print_', 'tryton-ok', default=True),
+            ])
+    print_ = StateAction('nodux_account_bank_reconciliation.report_account_reconciliation')
+
+    def do_print_(self, action):
+        if self.start.fecha:
+            fecha = self.start.fecha
+        if self.start.company:
+            company = self.start.company
+
+        data = {
+            'fecha': fecha,
+            'company': company.id,
+            }
+        return action, data
+
+    def transition_print_(self):
+        return 'end'
+
+
+class ReconciliationReport(Report):
+    'Reconciliation Report'
+    __name__ = 'account.reconciliation.report'
+
+    @classmethod
+    def parse(cls, report, objects, data, localcontext=None):
+        total = Decimal(0.0)
+        Company = Pool().get('company.company')
+        Reconciliation = Pool().get('account.reconciliation')
+        company = Company(data['company'])
+        company_id = Transaction().context.get('company')
+        company = Company(company_id)
+        fecha = data['fecha']
+        reconciliations = Reconciliation.search([('date','=', fecha)])
+        if company.timezone:
+            timezone = pytz.timezone(company.timezone)
+            dt = datetime.now()
+            hora = datetime.astimezone(dt.replace(tzinfo=pytz.utc), timezone)
+        for r in reconciliations:
+            total += r.amount
+
+        localcontext['company'] = company
+        localcontext['hora'] = hora.strftime('%H:%M:%S')
+        localcontext['fecha'] = hora.strftime('%d/%m/%Y')
+        localcontext['reconciliations'] = reconciliations
+        localcontext['total'] = total
+        new_objs = []
+
+        return super(ReconciliationReport, cls).parse(report,
+                new_objs, data, localcontext)
+
+class OpenSummaryReconciliationStart(ModelView):
+    'Open Summary Reconciliation Start'
+    __name__ = 'nodux_account_bank_reconciliation.print_summary_reconciliation.start'
+
+    company = fields.Many2One('company.company', 'Company', required=True)
+    fecha = fields.Date('Fecha de conciliacion', help='Fecha de conciliacion para reporte')
+    start_period = fields.Many2One('account.period', 'Period')
+    account = fields.Many2One('bank.account.number', 'Bank account')
+
+    @staticmethod
+    def default_company():
+        return Transaction().context.get('company')
+
+    @staticmethod
+    def default_fecha():
+        Date = Pool().get('ir.date')
+        date = Date.today()
+        return date
+
+class OpenSummaryReconciliation(Wizard):
+    'Open Summary Reconciliation'
+    __name__ = 'nodux_account_bank_reconciliation.print_summary_reconciliation'
+
+    start = StateView('nodux_account_bank_reconciliation.print_summary_reconciliation.start',
+        'nodux_account_bank_reconciliation.print_summary_reconciliation_start_view_form', [
+            Button('Cancel', 'end', 'tryton-cancel'),
+            Button('Print', 'print_', 'tryton-ok', default=True),
+            ])
+    print_ = StateAction('nodux_account_bank_reconciliation.report_account_summary_reconciliation')
+
+    def do_print_(self, action):
+        if self.start.fecha:
+            fecha = self.start.fecha
+        if self.start.company:
+            company = self.start.company
+
+        data = {
+            'fecha': fecha,
+            'company': company.id,
+            }
+        return action, data
+
+    def transition_print_(self):
+        return 'end'
+
+
+class SummaryReconciliationReport(Report):
+    'Summary Reconciliation Report'
+    __name__  = 'account.summary_reconciliation.report'
+
+    @classmethod
+    def parse(cls, report, objects, data, localcontext=None):
+        total = Decimal(0.0)
+        Company = Pool().get('company.company')
+        Reconciliation = Pool().get('account.reconciliation')
+        company = Company(data['company'])
+        company_id = Transaction().context.get('company')
+        company = Company(company_id)
+        fecha = data['fecha']
+        reconciliations = Reconciliation.search([('date','=', fecha)])
+        if company.timezone:
+            timezone = pytz.timezone(company.timezone)
+            dt = datetime.now()
+            hora = datetime.astimezone(dt.replace(tzinfo=pytz.utc), timezone)
+        for r in reconciliations:
+            total += r.amount
+
+        localcontext['company'] = company
+        localcontext['hora'] = hora.strftime('%H:%M:%S')
+        localcontext['fecha'] = hora.strftime('%d/%m/%Y')
+        localcontext['reconciliations'] = reconciliations
+        localcontext['total'] = total
+        new_objs = []
+
+        return super(SummaryReconciliationReport, cls).parse(report,
+                new_objs, data, localcontext)

@@ -10,7 +10,15 @@ def register():
         AccountPostDateCheck,
         AccountBankReconciliation,
         ReconciliationStart,
+        OpenReconciliationStart,
+        OpenSummaryReconciliationStart,
         module='nodux_account_bank_reconciliation', type_='model')
     Pool.register(
         Reconciliation,
+        OpenReconciliation,
+        OpenSummaryReconciliation,
         module='nodux_account_bank_reconciliation', type_='wizard')
+    Pool.register(
+        ReconciliationReport,
+        SummaryReconciliationReport,
+        module='nodux_account_bank_reconciliation', type_='report')
