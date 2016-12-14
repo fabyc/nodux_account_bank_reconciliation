@@ -13,7 +13,6 @@ from datetime import datetime,timedelta
 import time
 from trytond.wizard import (Wizard, StateView, StateAction, StateTransition,
     Button)
-
 conversor = None
 try:
     from numword import numword_es
@@ -23,19 +22,65 @@ except:
     print("Please install it...!")
 
 
-__all__ = [ 'AccountBankReconciliation', 'ReconciliationStart', 'Reconciliation',
+__all__ = ['ReconciliationStart', 'Reconciliation', 'AccountReconciliation',
         'OpenReconciliationStart', 'OpenReconciliation','ReconciliationReport',
         'OpenSummaryReconciliationStart', 'OpenSummaryReconciliation',
-        'SummaryReconciliationReport']
+        'SummaryReconciliationReport', 'AccountReconciliationAll']
 
 _STATES = {
     'readonly': In(Eval('state'), ['reconciled']),
 }
 
-class AccountBankReconciliation(ModelSQL, ModelView):
-    'Account Bank Reconciliation'
+class AccountReconciliationAll(ModelSQL, ModelView):
+    'Account Reconciliation All'
+    __name__ = 'account.reconciliation_all'
+
+    name_bank = fields.Char('Banco', readonly=True)
+    account_bank = fields.Char('Nro. Cuenta Bancaria', readonly=True)
+    lines = fields.One2Many('account.reconciliation', 'bank_account_ref', 'Lineas de Conciliacion Bancaria')
+    banco_inicial = fields.Numeric('Saldo Inicial', readonly = True)
+    banco_credito = fields.Numeric('Credito', readonly = True)
+    banco_debito = fields.Numeric('Debito', readonly = True)
+    banco_balance = fields.Numeric('Balance', readonly = True)
+    libro_inicial = fields.Numeric('Saldo Inicial', readonly = True)
+    libro_credito = fields.Numeric('Credito', readonly = True)
+    libro_debito = fields.Numeric('Debito', readonly = True)
+    libro_balance = fields.Numeric('Balance', readonly = True)
+
+    @classmethod
+    def __setup__(cls):
+        super(AccountReconciliationAll, cls).__setup__()
+
+    @staticmethod
+    def default_banco_inicial():
+        return Decimal(0.0)
+    @staticmethod
+    def default_banco_credito():
+        return Decimal(0.0)
+    @staticmethod
+    def default_banco_debito():
+        return Decimal(0.0)
+    @staticmethod
+    def default_banco_balance():
+        return Decimal(0.0)
+    @staticmethod
+    def default_libro_inicial():
+        return Decimal(0.0)
+    @staticmethod
+    def default_libro_credito():
+        return Decimal(0.0)
+    @staticmethod
+    def default_libro_debito():
+        return Decimal(0.0)
+    @staticmethod
+    def default_libro_balance():
+        return Decimal(0.0)
+
+class AccountReconciliation(ModelSQL, ModelView):
+    'Account Reconciliation'
     __name__ = 'account.reconciliation'
 
+    bank_account_ref = fields.Many2One('account.reconciliation_all', 'Cuenta')
     date = fields.Date('Date', required=True, states=_STATES)
     currency = fields.Many2One('currency.currency', 'Currency', states=_STATES)
     company = fields.Many2One('company.company', 'Company', states=_STATES)
@@ -53,7 +98,7 @@ class AccountBankReconciliation(ModelSQL, ModelView):
 
     @classmethod
     def __setup__(cls):
-        super(AccountBankReconciliation, cls).__setup__()
+        super(AccountReconciliation, cls).__setup__()
         cls._error_messages.update({
             'delete_reconcile': 'No puede eliminiar una conciliacion bancaria!',
         })
@@ -85,7 +130,7 @@ class AccountBankReconciliation(ModelSQL, ModelView):
         for reconciled in reconcileds:
             if reconciled.state == 'reconciled':
                 cls.raise_user_error('delete_reconcile')
-        return super(AccountBankReconciliation, cls).delete(reconcileds)
+        return super(AccountReconciliation, cls).delete(reconcileds)
 
     @classmethod
     @ModelView.button
@@ -95,7 +140,16 @@ class AccountBankReconciliation(ModelSQL, ModelView):
             if reconciled.conciliar == True:
                 pass
             else:
-                reconciled.write([reconciled],{ 'conciliar': True})
+                banco_inicial = reconciled.bank_account_ref.banco_inicial
+                banco_credito = reconciled.bank_account_ref.banco_credito
+                banco_debito = reconciled.bank_account_ref.banco_debito
+                banco_balance = reconciled.bank_account_ref.banco_balance
+                reconciled_all = reconciled.bank_account_ref
+                reconciled_all.banco_credito = banco_credito + reconciled.amount
+                reconciled_all.banco_balance = (banco_inicial + reconciled_all.banco_credito)-banco_debito
+                reconciled_all.save()
+                reconciled.write([reconciled],{'conciliar': True})
+
         cls.write(reconcileds, {'state': 'reconciled'})
 
 class ReconciliationStart(ModelView):
@@ -211,7 +265,7 @@ class OpenSummaryReconciliationStart(ModelView):
 
     company = fields.Many2One('company.company', 'Company', required=True)
     fecha = fields.Date('Fecha de conciliacion', help='Fecha de conciliacion para reporte')
-    start_period = fields.Many2One('account.period', 'Period')
+    start_period = fields.Many2One('account.period', 'Period', required = True)
     account = fields.Many2One('bank.account.number', 'Bank account')
 
     @staticmethod
@@ -240,10 +294,13 @@ class OpenSummaryReconciliation(Wizard):
             fecha = self.start.fecha
         if self.start.company:
             company = self.start.company
+        if self.start.start_period:
+            period = self.start.start_period
 
         data = {
             'fecha': fecha,
             'company': company.id,
+            'periodo' : period.id,
             }
         return action, data
 
@@ -259,24 +316,46 @@ class SummaryReconciliationReport(Report):
     def parse(cls, report, objects, data, localcontext=None):
         total = Decimal(0.0)
         Company = Pool().get('company.company')
+        Period = Pool().get('account.period')
         Reconciliation = Pool().get('account.reconciliation')
         company = Company(data['company'])
         company_id = Transaction().context.get('company')
         company = Company(company_id)
         fecha = data['fecha']
+        periodo = Period(data['periodo'])
         reconciliations = Reconciliation.search([('date','=', fecha)])
         if company.timezone:
             timezone = pytz.timezone(company.timezone)
             dt = datetime.now()
             hora = datetime.astimezone(dt.replace(tzinfo=pytz.utc), timezone)
+
         for r in reconciliations:
-            total += r.amount
+            if r.conciliar == True:
+                total += r.amount
 
         localcontext['company'] = company
         localcontext['hora'] = hora.strftime('%H:%M:%S')
         localcontext['fecha'] = hora.strftime('%d/%m/%Y')
         localcontext['reconciliations'] = reconciliations
         localcontext['total'] = total
+        localcontext['periodo'] = periodo.name
+        localcontext['banco'] = Decimal(0.0)
+        localcontext['cuenta'] = Decimal(0.0)
+        localcontext['inicial_bancos'] = Decimal(0.0)
+        localcontext['cheque_bancos'] = Decimal(0.0)
+        localcontext['deposito_bancos'] = Decimal(0.0)
+        localcontext['nota_bancos'] = Decimal(0.0)
+        localcontext['saldo_bancos'] = total
+        localcontext['cheque_transito'] = Decimal(0.0)
+        localcontext['saldo_transito'] = Decimal(0.0)
+        localcontext['inicial_libros'] = Decimal(0.0)
+        localcontext['cheque_libros'] = Decimal(0.0)
+        localcontext['deposito_libros'] = Decimal(0.0)
+        localcontext['nota_libros'] = Decimal(0.0)
+        localcontext['saldo_libros'] = Decimal(0.0)
+        localcontext['cheque_exceso'] = Decimal(0.0)
+        localcontext['deposito_exceso'] = Decimal(0.0)
+        localcontext['nota_exceso'] = Decimal(0.0)
         new_objs = []
 
         return super(SummaryReconciliationReport, cls).parse(report,

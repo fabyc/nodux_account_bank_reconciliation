@@ -5,10 +5,12 @@
 from trytond.pool import Pool
 from .postdated_check import *
 from .reconciliation import *
+
 def register():
     Pool.register(
+        AccountReconciliationAll,
         AccountPostDateCheck,
-        AccountBankReconciliation,
+        AccountReconciliation,
         ReconciliationStart,
         OpenReconciliationStart,
         OpenSummaryReconciliationStart,

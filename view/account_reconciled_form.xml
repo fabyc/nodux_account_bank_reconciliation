@@ -2,23 +2,34 @@
 <!-- This file is part of the nodux_account_postdated_check module for Tryton.
 The COPYRIGHT file at the top level of this repository contains
 the full copyright notices and license terms. -->
-<form string="Bank reconciliation" col="6">
-    <label name="date"/>
-    <field name="date"/>
+<form string="Bank reconciliation" col="8">
+    <label name="name_bank"/>
+    <field name="name_bank"/>
+    <label name="account_bank"/>
+    <field name="account_bank"/>
     <newline/>
-    <label name="amount"/>
-    <field name="amount"/>
-    <label name="currency"/>
-    <field name="currency"/>
+    <field name="lines" colspan="8"
+        view_ids="nodux_account_bank_reconciliation.reconciliation_line_view_tree_sequence"/>
     <newline/>
-    <label name="account"/>
-    <field name="account"/>
-    <label name="conciliar"/>
-    <field name="conciliar"/>
+    <separator string="Segun Bancos" colspan="4" id="banco_info"/>
     <newline/>
-    <label name="state"/>
-    <field name="state"/>
-    <group colspan="2" id="group_check_1">
-        <button name="reconcile" string="_Conciliar"/>
-    </group>
+    <label name="banco_inicial"/>
+    <field name="banco_inicial"/>
+    <label name="banco_credito"/>
+    <field name="banco_credito"/>
+    <label name="banco_debito"/>
+    <field name="banco_debito"/>
+    <label name="banco_balance"/>
+    <field name="banco_balance"/>
+    <newline/>
+    <separator string="Segun Libros" colspan="4" id="libro_info"/>
+    <newline/>
+    <label name="libro_inicial"/>
+    <field name="libro_inicial"/>
+    <label name="libro_credito"/>
+    <field name="libro_credito"/>
+    <label name="libro_debito"/>
+    <field name="libro_debito"/>
+    <label name="libro_balance"/>
+    <field name="libro_balance"/>
 </form>

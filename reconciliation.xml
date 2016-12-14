@@ -10,19 +10,19 @@ the full copyright notices and license terms. -->
             id="menu_reconciliation" sequence="35"/>
 
         <record model="ir.ui.view" id="account_reconciliation_form">
-            <field name="model">account.reconciliation</field>
+            <field name="model">account.reconciliation_all</field>
             <field name="type">form</field>
             <field name="name">account_reconciled_form</field>
         </record>
         <record model="ir.ui.view" id="account_reconciliation_tree">
-            <field name="model">account.reconciliation</field>
+            <field name="model">account.reconciliation_all</field>
             <field name="type">tree</field>
             <field name="name">account_reconciled_tree</field>
         </record>
 
         <record model="ir.action.act_window" id="act_reconciliation_form">
             <field name="name">All Reconciliation</field>
-            <field name="res_model">account.reconciliation</field>
+            <field name="res_model">account.reconciliation_all</field>
         </record>
         <record model="ir.action.act_window.view" id="act_reconciliation_form_view1">
             <field name="sequence" eval="10"/>
@@ -37,17 +37,24 @@ the full copyright notices and license terms. -->
         <menuitem parent="menu_reconciliation" action="act_reconciliation_form"
             id="menu_reconciliation_form" sequence="5"/>
 
-        <record model="ir.action.act_window.domain" id="act_reconciliation_domain_draft">
-            <field name="name">Not reconciliated</field>
-            <field name="sequence" eval="10"/>
-            <field name="domain">[('state', '=', 'draft')]</field>
-            <field name="act_window" ref="act_reconciliation_form"/>
+        <!--Lineas -->
+        <record model="ir.ui.view" id="account_reconciliation1_form">
+            <field name="model">account.reconciliation</field>
+            <field name="type">form</field>
+            <field name="name">account_reconciled_line_form</field>
         </record>
-        <record model="ir.action.act_window.domain" id="act_reconciliation_domain_posted">
-            <field name="name">Reconciliated</field>
-            <field name="sequence" eval="20"/>
-            <field name="domain">[('state', '=', 'reconciled')]</field>
-            <field name="act_window" ref="act_reconciliation_form"/>
+        <record model="ir.ui.view" id="account_reconciliation1_tree">
+            <field name="model">account.reconciliation</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="10"/>
+            <field name="name">account_reconciled_line_tree</field>
+        </record>
+
+        <record model="ir.ui.view" id="reconciliation_line_view_tree_sequence">
+            <field name="model">account.reconciliation</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="20"/>
+            <field name="name">reconciliation_line_tree_sequence</field>
         </record>
 
         <!--Wizard conciliation -->
