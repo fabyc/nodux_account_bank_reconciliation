@@ -18,6 +18,10 @@ msgctxt "field:account.reconciliation,bank_account:"
 msgid "Number bank account"
 msgstr "No. de cuenta"
 
+msgctxt "field:account.reconciliation,bank_account_ref:"
+msgid "Cuenta"
+msgstr ""
+
 msgctxt "field:account.reconciliation,ch_num:"
 msgid "Check num"
 msgstr "No. de cheque"
@@ -77,6 +81,83 @@ msgstr "Usuario modificación"
 msgctxt "field:account.reconciliation.start,id:"
 msgid "ID"
 msgstr "ID"
+
+msgctxt "field:account.reconciliation_all,account_bank:"
+msgid "Nro. Cuenta Bancaria"
+msgstr ""
+
+#, fuzzy
+msgctxt "field:account.reconciliation_all,banco_balance:"
+msgid "Balance"
+msgstr "Saldo"
+
+msgctxt "field:account.reconciliation_all,banco_credito:"
+msgid "Credito"
+msgstr ""
+
+msgctxt "field:account.reconciliation_all,banco_debito:"
+msgid "Debito"
+msgstr ""
+
+msgctxt "field:account.reconciliation_all,banco_inicial:"
+msgid "Saldo Inicial"
+msgstr ""
+
+#, fuzzy
+msgctxt "field:account.reconciliation_all,create_date:"
+msgid "Create Date"
+msgstr "Fecha de Creación"
+
+#, fuzzy
+msgctxt "field:account.reconciliation_all,create_uid:"
+msgid "Create User"
+msgstr "Usuario creación"
+
+#, fuzzy
+msgctxt "field:account.reconciliation_all,id:"
+msgid "ID"
+msgstr "Identificador"
+
+#, fuzzy
+msgctxt "field:account.reconciliation_all,libro_balance:"
+msgid "Balance"
+msgstr "Saldo"
+
+msgctxt "field:account.reconciliation_all,libro_credito:"
+msgid "Credito"
+msgstr ""
+
+msgctxt "field:account.reconciliation_all,libro_debito:"
+msgid "Debito"
+msgstr ""
+
+msgctxt "field:account.reconciliation_all,libro_inicial:"
+msgid "Saldo Inicial"
+msgstr ""
+
+msgctxt "field:account.reconciliation_all,lines:"
+msgid "Lineas de Conciliacion Bancaria"
+msgstr ""
+
+#, fuzzy
+msgctxt "field:account.reconciliation_all,name_bank:"
+msgid "Banco"
+msgstr "Banco"
+
+#, fuzzy
+msgctxt "field:account.reconciliation_all,rec_name:"
+msgid "Name"
+msgstr "Nombre"
+
+#, fuzzy
+msgctxt "field:account.reconciliation_all,write_date:"
+msgid "Write Date"
+msgstr "Modificado por usuario"
+
+#, fuzzy
+msgctxt "field:account.reconciliation_all,write_uid:"
+msgid "Write User"
+msgstr "Usuario modificación"
 
 msgctxt ""
 "field:nodux_account_bank_reconciliation.print_reconciliation.start,account:"
@@ -138,13 +219,18 @@ msgctxt ""
 msgid "Fecha de conciliacion para reporte"
 msgstr ""
 
+#, fuzzy
 msgctxt "model:account.reconciliation,name:"
-msgid "Account Bank Reconciliation"
+msgid "Account Reconciliation"
 msgstr "Conciliaciones bancarias"
 
 msgctxt "model:account.reconciliation.start,name:"
 msgid "Reconciliation Start"
 msgstr "Iniciar Conciliación"
+
+msgctxt "model:account.reconciliation_all,name:"
+msgid "Account Reconciliation All"
+msgstr ""
 
 msgctxt "model:ir.action,name:act_reconciliation_form"
 msgid "All Reconciliation"
@@ -155,7 +241,7 @@ msgid "Conciliacion bancaria"
 msgstr ""
 
 msgctxt "model:ir.action,name:report_account_reconciliation"
-msgid "Conciliacion"
+msgid "Imprimir conciliacion"
 msgstr ""
 
 msgctxt "model:ir.action,name:report_account_summary_reconciliation"
@@ -167,17 +253,11 @@ msgid "Imprimir conciliacion"
 msgstr ""
 
 msgctxt "model:ir.action,name:wizard_print_summary_reconciliation"
-msgid "Imprimir conciliacion"
+msgid "Imprimir resumen de conciliacion"
 msgstr ""
 
-msgctxt ""
-"model:ir.action.act_window.domain,name:act_reconciliation_domain_draft"
+msgctxt "model:ir.action.act_window.domain,name:"
 msgid "Not reconciliated"
-msgstr "No conciliado"
-
-msgctxt ""
-"model:ir.action.act_window.domain,name:act_reconciliation_domain_posted"
-msgid "Reconciliated"
 msgstr "Conciliado"
 
 msgctxt "model:ir.ui.menu,name:menu_print_reconciliation"
@@ -185,7 +265,7 @@ msgid "Imprimir conciliacion"
 msgstr ""
 
 msgctxt "model:ir.ui.menu,name:menu_print_summary_reconciliation"
-msgid "Imprimir conciliacion"
+msgid "Imprimir resumen de conciliacion"
 msgstr ""
 
 msgctxt "model:ir.ui.menu,name:menu_reconciliation"
@@ -440,6 +520,24 @@ msgstr "Cheques posfechados"
 
 msgctxt "view:account.reconciliation:"
 msgid "_Conciliar"
+msgstr ""
+
+#, fuzzy
+msgctxt "view:account.reconciliation_all:"
+msgid "Bank reconciliation"
+msgstr "Conciliación bancaria"
+
+#, fuzzy
+msgctxt "view:account.reconciliation_all:"
+msgid "Postdated check"
+msgstr "Cheques posfechados"
+
+msgctxt "view:account.reconciliation_all:"
+msgid "Segun Bancos"
+msgstr ""
+
+msgctxt "view:account.reconciliation_all:"
+msgid "Segun Libros"
 msgstr ""
 
 msgctxt "view:nodux_account_bank_reconciliation.print_reconciliation.start:"
