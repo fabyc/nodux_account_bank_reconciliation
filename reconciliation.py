@@ -136,7 +136,6 @@ class AccountReconciliation(ModelSQL, ModelView):
     @ModelView.button
     def reconcile(cls, reconcileds):
         for reconciled in reconcileds:
-            #postdated.set_number()
             if reconciled.conciliar == True:
                 pass
             else:
@@ -149,7 +148,6 @@ class AccountReconciliation(ModelSQL, ModelView):
                 reconciled_all.banco_balance = (banco_inicial + reconciled_all.banco_credito)-banco_debito
                 reconciled_all.save()
                 reconciled.write([reconciled],{'conciliar': True})
-
         cls.write(reconcileds, {'state': 'reconciled'})
 
 class ReconciliationStart(ModelView):

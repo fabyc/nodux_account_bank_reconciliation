@@ -38,11 +38,13 @@ class AccountPostDateCheck():
         Reconciled = pool.get('account.reconciliation')
         AllReconciled = pool.get('account.reconciliation_all')
         Bank = pool.get('bank')
-        reconciled = Reconciled()
+
         allreconciled = AllReconciled()
         amount_total = Decimal(0.0)
-        
+
         all_r = None
+
+
         for line in self.lines:
             account = line.account_new.id
         banks = Bank.search([('account_expense', '=', account)])
@@ -71,18 +73,28 @@ class AccountPostDateCheck():
 
 
         for line in self.lines:
-            amount_total += line.amount
-            reconciled.bank_account_ref = allreconciled.id
-            reconciled.amount = line.amount
-            reconciled.conciliar = False
-            reconciled.account = line.account_new.id
-            reconciled.state = 'draft'
-            reconciled.date = line.date
-            reconciled.expired = line.date_expire
-            reconciled.party = self.party
-            reconciled.ch_num = line.num_check
-            reconciled.bank_account = line.num_account
-            reconciled.save()
+            reconciled = Reconciled.search([('ch_num', '=', line.num_check)])
+            if reconciled:
+                for r in reconciled:
+                    amount_total += line.amount
+                    r.amount = r.amount + line.amount
+                    r.conciliar = False
+                    r.save()
+
+            else:
+                reconciled = Reconciled()
+                amount_total += line.amount
+                reconciled.bank_account_ref = allreconciled.id
+                reconciled.amount = line.amount
+                reconciled.conciliar = False
+                reconciled.account = line.account_new.id
+                reconciled.state = 'draft'
+                reconciled.date = line.date
+                reconciled.expired = line.date_expire
+                reconciled.party = self.party
+                reconciled.ch_num = line.num_check
+                reconciled.bank_account = line.num_account
+                reconciled.save()
 
         allreconciled.libro_credito = allreconciled.libro_credito  + amount_total
         allreconciled.libro_balance = (allreconciled.libro_inicial + allreconciled.libro_credito)-allreconciled.libro_debito
